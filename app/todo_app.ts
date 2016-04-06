@@ -1,18 +1,26 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {Todo} from './todo';
 import {TodoList} from './todo_list';
 import {TodoForm} from './todo_form';
+import {TodoService} from './todo.service';
+
 @Component({
     selector: 'todo-app',
     templateUrl: 'app/todo_app.html',
     styles:['a { cursor: pointer; cursor: hand; }'],
-    directives: [TodoList, TodoForm]
+    directives: [TodoList, TodoForm],
+    providers: [TodoService]
 })
-export class TodoApp {
-    todos: Todo[] = [
-        {text:'learn angular', done:true},
-        {text:'build an angular app', done:false}
-    ];
+export class TodoApp implements OnInit{
+    //todos: Todo[] = [
+    //    {text:'learn angular', done:true},
+    //    {text:'build an angular app', done:false}
+    //];
+    todos: Todo[];
+    constructor(private _todoService: TodoService) { }
+    getServices() {
+        this.todos = this._todoService.getServices();
+    }
     get remaining() {
         return this.todos.reduce((count: number, todo: Todo) => count + +!todo.done, 0);
     }
@@ -25,5 +33,8 @@ export class TodoApp {
     }
     addTask(task: Todo) {
         this.todos.push(task);
+    }
+    ngOnInit() {
+        this.getServices();
     }
 }

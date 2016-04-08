@@ -10,6 +10,7 @@ export class TodoForm {
     addTodo() {
         if (this.task) {
             this.newTask.next({text:this.task, done:false});
+            //localStorage.setItem('angular2-todos', JSON.stringify());
         }
         this.task = '';
     }

@@ -12,4 +12,7 @@ import {Todo} from './todo';
 })
 export class TodoList {
     @Input() todos: Todo[];
+    editDetail(todo:Todo) {
+        console.log(todo);
+    }
 }

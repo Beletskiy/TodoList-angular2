@@ -1,6 +1,6 @@
 <ul class="list-unstyled">
     <li *ngFor="#todo of todos">
         <input type="checkbox" [(ngModel)]="todo.done">
-        <span class="done-{{todo.done}}">{{todo.text}}</span>
+        <span class="done-{{todo.done}}" (click) = "editDetail(todo)">{{todo.text}}</span>
     </li>
 </ul>
